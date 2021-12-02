@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -52,16 +53,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
         imageView.setEnabled(false);
-        if(thereIsAWin(tag))
+        if(thereIsAWin(tag)) {
             tv.setText(board[tag]+ "Wins!");
+            Button newGame = (Button) findViewById(R.id.newGame);
+            newGame.setVisibility(view.VISIBLE);
+        }
 
     }
 
     public boolean thereIsAWin(int tag)
     {
-        if (horizontal(tag) || vertical(tag) || leftToRight(tag) || rightToLeft(tag));
+        if (horizontal(tag) || vertical(tag) || leftToRight(tag) || rightToLeft(tag))
             return true;
+        return false;
     }
+
     public boolean vertical(int tag)
     {
         int win=0;
@@ -107,5 +113,45 @@ public class MainActivity extends AppCompatActivity {
         if(board[tag]==board[6] && board[6]==board[4] && board[4]==board[2])
             return true;
         return false;
+    }
+
+    public void clearScreen(View view)
+    {
+        ImageView imageView = (ImageView) findViewById(R.id.imageButton);
+        ImageView imageView2 = (ImageView) findViewById(R.id.imageButton2);
+        ImageView imageView3 = (ImageView) findViewById(R.id.imageButton3);
+        ImageView imageView4 = (ImageView) findViewById(R.id.imageButton4);
+        ImageView imageView5 = (ImageView) findViewById(R.id.imageButton5);
+        ImageView imageView6 = (ImageView) findViewById(R.id.imageButton6);
+        ImageView imageView7 = (ImageView) findViewById(R.id.imageButton7);
+        ImageView imageView8 = (ImageView) findViewById(R.id.imageButton8);
+
+        imageView.setImageResource(android.R.color.transparent);
+        imageView2.setImageResource(android.R.color.transparent);
+        imageView3.setImageResource(android.R.color.transparent);
+        imageView4.setImageResource(android.R.color.transparent);
+        imageView5.setImageResource(android.R.color.transparent);
+        imageView6.setImageResource(android.R.color.transparent);
+        imageView7.setImageResource(android.R.color.transparent);
+        imageView8.setImageResource(android.R.color.transparent);
+
+        imageView.setEnabled(true);
+        imageView2.setEnabled(true);
+        imageView3.setEnabled(true);
+        imageView4.setEnabled(true);
+        imageView5.setEnabled(true);
+        imageView6.setEnabled(true);
+        imageView7.setEnabled(true);
+        imageView8.setEnabled(true);
+
+        createBoard();
+
+        Button newGame = (Button) findViewById(R.id.newGame);
+        newGame.setVisibility(view.GONE);
+
+        TextView tv = (TextView) findViewById(R.id.textView);
+        tv.setText("Player 1");
+        player1 = true;
+
     }
 }
